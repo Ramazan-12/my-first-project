@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Шығын Detector</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="container">
+    <div class="brand">
+      <div class="logo">₸</div>
+      <div>
+        <h1>Шығын Detector</h1>
+        <p class="muted">Ақшаң қайда кетіп жатқанын көрсетеді 😄</p>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <label class="toggle">
+        <input id="shameMode" type="checkbox" checked />
+        <span>Ұят режимі</span>
+      </label>
+      <button id="resetBtn" class="btn ghost" title="Барлығын тазалау">Тазалау</button>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section class="card">
+      <h2>Шығын қосу</h2>
+
+      <form id="txForm" class="form">
+        <div class="row">
+          <label>Түрі</label>
+          <div class="seg">
+            <input type="radio" name="type" id="tExpense" value="expense" checked />
+            <label for="tExpense">Шығын</label>
+
+            <input type="radio" name="type" id="tIncome" value="income" />
+            <label for="tIncome">Кіріс</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="title">Атауы</label>
+          <input id="title" type="text" placeholder="Мыс: кофе, такси, стипендия..." maxlength="40" required />
+        </div>
+
+        <div class="row">
+          <label for="amount">Сома (₸)</label>
+          <input id="amount" type="number" inputmode="numeric" min="0" step="1" placeholder="Мыс: 1500" required />
+        </div>
+
+        <div class="row">
+          <label for="category">Категория</label>
+          <select id="category">
+            <option value="Тамақ">Тамақ</option>
+            <option value="Көлік">Көлік</option>
+            <option value="Кофе/шай">Кофе/шай</option>
+            <option value="Оқу">Оқу</option>
+            <option value="Ойын-сауық">Ойын-сауық</option>
+            <option value="Байланыс/интернет">Байланыс/интернет</option>
+            <option value="Киім">Киім</option>
+            <option value="Денсаулық">Денсаулық</option>
+            <option value="Басқа">Басқа</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="date">Күні</label>
+          <input id="date" type="date" required />
+        </div>
+
+        <button class="btn primary" type="submit">Қосу</button>
+      </form>
+
+      <div class="note">
+        <strong>Кеңес:</strong> ай соңында “Статистика” бөлімі сенің әдетіңді көрсетеді.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Қысқаша</h2>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="muted">Кіріс</div>
+          <div id="incomeSum" class="money">0 ₸</div>
+        </div>
+        <div class="stat">
+          <div class="muted">Шығын</div>
+          <div id="expenseSum" class="money">0 ₸</div>
+        </div>
+        <div class="stat big">
+          <div class="muted">Баланс</div>
+          <div id="balanceSum" class="money">0 ₸</div>
+        </div>
+      </div>
+
+      <div class="advice">
+        <h3>Detector кеңесі</h3>
+        <p id="adviceText" class="advice-text">Кеңес шығару үшін кемі 2-3 жазба қос.</p>
+      </div>
+
+      <div class="mini">
+        <h3>Категориялар (ай бойынша)</h3>
+        <div id="catBars" class="bars"></div>
+      </div>
+    </section>
+
+    <section class="card wide">
+      <div class="list-head">
+        <h2>Транзакциялар</h2>
+        <div class="filters">
+          <select id="monthFilter" title="Айды таңдау"></select>
+          <select id="typeFilter" title="Түрі">
+            <option value="all">Барлығы</option>
+            <option value="expense">Тек шығын</option>
+            <option value="income">Тек кіріс</option>
+          </select>
+          <select id="sortFilter" title="Сұрыптау">
+            <option value="new">Жаңа → ескі</option>
+            <option value="old">Ескі → жаңа</option>
+            <option value="big">Сома көп → аз</option>
+            <option value="small">Сома аз → көп</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="txList" class="tx-list"></div>
+      <div id="emptyState" class="empty muted">Әзірге жазба жоқ. Жоғарыдан қосып көр 😊</div>
+    </section>
+  </main>
+
+  <footer class="container footer muted">
+    © Шығын Detector — LocalStorage сақтайды. GitHub Pages-ке оңай салынады.
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
